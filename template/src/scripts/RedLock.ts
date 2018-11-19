@@ -19,7 +19,7 @@ export default class RedLock extends think.Service {
     static async init() {
         return new Promise((resolve, reject) => {
             let lockRedis: IORedis.Redis[] = [];
-            let lockConfig = think.config('redlock');
+            let lockConfig = think.config('redis').redlock;
             if (think.isArray(lockConfig)) {
                 lockRedis = lockConfig.map((one: any) => {
                     return new IORedis(one);

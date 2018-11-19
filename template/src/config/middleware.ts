@@ -2,12 +2,11 @@ import * as path from 'path';
 import { think, Context } from 'thinkjs';
 const isDev = think.env === 'development';
 
-const RateLimit = require('koa2-ratelimit').RateLimit;
-const limiter = RateLimit.middleware;
+const rateLimit = require('koa2-ratelimit');
 
 module.exports = [
     {
-        handle: limiter,
+        handle: rateLimit.RateLimit.middleware,
         enable: true,
         options: {
             interval: { sec: 3 }, // 15 minutes = 15*60*1000
@@ -15,7 +14,8 @@ module.exports = [
             prefixKey: 'iplimit',
             onLimitReached: (ctx: Context) => {
                 think.logger.error(`429:Client with ip= ${ctx.request.ip} onLimitReached,action= ${ctx.method}:${ctx.controller}/${ctx.action}, rateLimit= ${JSON.stringify(ctx.state.rateLimit)}`);
-            }
+            },
+            store: new rateLimit.Stores.Redis(think.config('redis').rateLimit)
         }
     },
     {
