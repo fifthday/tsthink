@@ -12,10 +12,18 @@
         "no-var-requires": false,
         "no-empty": false,
         "member-access": false,
-        "no-empty-interface": false, 
+        "no-empty-interface": false,
         "interface-name": false,
         "eofline": false,
-        "quotemark": false
+        "quotemark": false,
+        "prefer-const": false,
+        "variable-name": false,
+        "typedef-whitespace": false,
+        "whitespace": false,
+        "max-line-length": false,
+        "arrow-parens": false,
+        "object-literal-shorthand": false,
+        "no-console": true
     },
     "rulesDirectory": []
 }

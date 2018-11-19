@@ -11,7 +11,10 @@
         "baseUrl": ".",
         "paths": {
             "thinkjs": ["src/index"]
-        }
+
+        },
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
     },
     "include": [
         "src/**/*.ts"

@@ -1,37 +1,46 @@
 {
-  "name": "<%= name %>",
-  "description": "<%= description %>",
-  "version": "1.0.0",
-  "author": "<%- author %>",
-  "scripts": {
-    "start": "node development.js",
-    "compile": "npm run lint && tsc",
-    "lint": "tslint \"src/**/*.ts\""
-  },
-  "dependencies": {
-    "think-cache": "^1.0.7",
-    "think-cache-file": "^1.0.8",
-    "think-model": "^1.1.5",
-    "think-model-mysql": "^1.0.0",
-    "think-session": "^1.0.3",
-    "think-session-file": "^1.0.5",
-    "think-view": "^1.0.11",
-    "think-view-nunjucks": "^1.0.1",
-    "thinkjs": "^3.2.3"
-  },
-  "devDependencies": {
-    "typescript": "^2.5.3",
-    "@types/koa": "*",
-    "node-notifier": "^5.0.2",
-    "think-watcher": "^3.0.0",
-    "think-inspect": "0.0.2",
-    "think-typescript": "^1.0.4",
-    "tslint": "^5.8.0"
-  },
-  "repository": "",
-  "license": "MIT",
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "readmeFilename": "README.md"
+    "name": "<%= name %>",
+    "description": "<%= description %>",
+    "version": "1.0.0",
+    "author": "<%- author %>",
+    "scripts": {
+        "start": "node development.js",
+        "compile": "npm run lint && tsc",
+        "lint": "tslint \"src/**/*.ts\""
+    },
+    "dependencies": {
+        "think-cache": "^1.0.7",
+        "think-cache-file": "^1.0.8",
+        "think-model": "^1.1.5",
+        "think-model-mysql": "^1.0.0",
+        "think-session": "^1.0.3",
+        "think-session-file": "^1.0.5",
+        "think-view": "^1.0.11",
+        "think-view-nunjucks": "^1.0.1",
+        "thinkjs": "^3.2.9",
+        "axios": "^0.18.0",
+        "ioredis": "^3.2.2",
+        "koa2-ratelimit": "^0.6.3",
+        "lodash": "^4.17.11",
+        "moment": "^2.22.2",
+        "redlock": "^3.1.2"
+    },
+    "devDependencies": {
+        "@types/ioredis": "^3.2.17",
+        "@types/lodash": "^4.14.117",
+        "@types/redlock": "^3.0.2",
+        "@types/koa": "*",
+        "node-notifier": "^5.0.2",
+        "think-inspect": "0.0.2",
+        "think-typescript": "^1.0.4",
+        "think-watcher": "^3.0.0",
+        "tslint": "^5.8.0",
+        "typescript": "^3.0.0"
+    },
+    "repository": "",
+    "license": "MIT",
+    "engines": {
+        "node": ">=6.0.0"
+    },
+    "readmeFilename": "README.md"
 }

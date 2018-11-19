@@ -1,15 +1,18 @@
 {
-  "apps": [{
-    "name": "<%= APP_NAME %>",
-    "script": "production.js",
-    "cwd": "<%= ROOT_PATH %>",
-    "exec_mode": "fork",
-    "max_memory_restart": "1G",
-    "autorestart": true,
-    "node_args": [],
-    "args": [],
-    "env": {
-      
-    }
-  }]
+    "apps": [{
+        "name": "<%= APP_NAME %>",
+        "script": "production.js",
+        "cwd": "<%= ROOT_PATH %>",
+        "exec_mode": "fork",
+        "max_memory_restart": "2G",
+        "autorestart": true,
+        "err_file": "logs/project.pm2.log",
+        "out_file": "logs/project.pm2.log",
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+        "node_args": [],
+        "args": [],
+        "env": {
+
+        }
+    }]
 }
