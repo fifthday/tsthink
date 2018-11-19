@@ -7,7 +7,7 @@ module.exports = {
         "description": {
             "type": "string",
             "message": "Project description",
-            "default": "application created by thinkjs"
+            "default": "application created by xu"
         },
         "author": {
             "type": "string",
