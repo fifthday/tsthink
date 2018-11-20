@@ -34,6 +34,7 @@ module.exports = {
             ["README.md", "README.md"],
             ["tsconfig.json", "tsconfig.json"],
             ["tslint.json", "tslint.json"],
+            [".eslintrc.js", ".eslintrc.js"],
             ["src/@types", "src/@types"],
             ["src/scripts", "src/scripts"],
             ["src/middleware/error.ts", "src/middleware/error.ts"],
