@@ -21,7 +21,7 @@ module.exports = {
             ["src/controller/base.ts", "src/controller/base.ts"],
             ["src/controller/index.ts", "src/controller/index.ts"],
             ["src/logic", "src/logic"],
-            ["src/model", "src/model"],
+            // ["src/model", "src/model"],
             ["src/index.ts", "src/index.ts"],
             ["test/index.ts", "test/index.ts"],
             ["view/index_index.html", "view/index_index.html"],

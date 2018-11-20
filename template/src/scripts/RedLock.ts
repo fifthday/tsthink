@@ -1,6 +1,6 @@
 import { think } from 'thinkjs';
 import * as IORedis from 'ioredis';
-import Redlock = require('redlock');
+import Lock = require('redlock');
 
 think.app.on("appReady", async () => {
     think.logger.info('RedLock appReady!');
@@ -13,7 +13,7 @@ think.app.on("appReady", async () => {
 });
 
 export default class RedLock extends think.Service {
-    private static redlock: Redlock;
+    private static redlock: Lock;
 
     private static LockPrefix = 'Redlock:';
     static async init() {
@@ -28,7 +28,7 @@ export default class RedLock extends think.Service {
                 lockRedis.push(new IORedis(lockConfig));
             }
             think.logger.info('redlock redis clients:' + lockRedis.length);
-            this.redlock = new Redlock(lockRedis, {
+            this.redlock = new Lock(lockRedis, {
                 // the expected clock drift; for more details
                 // see http://redis.io/topics/distlock
                 driftFactor: 0.01, // time in ms
