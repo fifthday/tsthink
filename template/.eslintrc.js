@@ -66,7 +66,7 @@ module.exports = {
         "no-unused-vars": ["warn"],
         "no-constant-condition": ["warn"],
         "no-empty": ["warn"],
-        "no-undef": 1,
+        "no-undef": 0,
         "complexity": 0,
         // "space-before-function-paren": 0
     }

@@ -1,6 +1,5 @@
 import { EntityManager, Transaction, TransactionManager, Connection } from "typeorm";
 import Orm from "./Orm";
-import Utils from "./Utils";
 
 export default class TransactionRunner {
     cacheKeys: string[];
@@ -38,19 +37,13 @@ export default class TransactionRunner {
         }
     }
 
-    addCacheOption() {
-        const key = Utils.someMd5();
-        this.cacheKeys.push(key);
-        return {
-            cache: {
-                id: key,
-                // milliseconds: Orm.CACHE_MS
-            }
-        };
+    addTransCache(...keys: Array<string | number>) {
+        let ret = Orm.getCache(...keys);
+
+        this.cacheKeys.push(ret.cache.id);
+        return ret;
     }
     async clearCache(connection: Connection) {
-        if (connection.queryResultCache) {
-            await connection.queryResultCache.remove(this.cacheKeys);
-        }
+        return Orm.removeCache(this.cacheKeys, connection);
     }
 }
