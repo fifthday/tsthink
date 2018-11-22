@@ -1,4 +1,4 @@
-// import * as shortid from 'shortid';
+import * as shortid from 'shortid';
 import * as crypto from 'crypto';
 import * as moment from 'moment';
 import ErrorMessage from './ErrorMessage';
@@ -19,20 +19,25 @@ export default class Utils {
             });
         });
     }
-    // static shortid() {
-    //     return shortid.generate();
-    // }
+    static shortid() {
+        return shortid.generate();
+    }
 
     static base64(text: string) {
         let b = Buffer.from(text);
         return b.toString('base64');
     }
-    // static someMd5() {
-    //     return Utils.md5(Utils.shortid());
-    // }
 
-    static getMoment(_dateString?: string | number | Date) {
-        let dateString = _dateString;
+    static fromBase64(text: string) {
+        const buf = new Buffer(text, 'base64');
+        return buf.toString();
+    }
+    static someMd5() {
+        return Utils.md5(Utils.shortid());
+    }
+
+    static getMoment(dateString?: string | number | Date) {
+        // let dateString = _dateString;
         if (typeof dateString === 'string') {
             if (!isNaN(dateString as any)) {
                 dateString = Number(dateString);
@@ -92,8 +97,8 @@ export default class Utils {
     }
 
     // .zone(-8)
-    static daysBetween(now: string | number | Date, _from: string | number | Date) {
-        let from = _from || 0;
+    static daysBetween(now: string | number | Date, from: string | number | Date) {
+        from = from || 0;
         let dayStart = this.getMoment(now).startOf('day').valueOf();
         let dis = dayStart - this.getMoment(from).startOf('day').valueOf();
         let day = dis / 1000 / 60 / 60 / 24;
@@ -101,8 +106,8 @@ export default class Utils {
         return day;
     }
 
-    static oclock(hour: number, _date?: string | number | Date) {
-        let date = this.toDate(_date);
+    static oclock(hour: number, date?: string | number | Date) {
+        date = this.toDate(date);
         return this.getMoment(this.hoursLater(hour, date)).format('YYYY-MM-DD HH');
     }
 
@@ -129,8 +134,8 @@ export default class Utils {
         return Math.floor(r * num);
     }
 
-    static randSome(num: number, _count: number, exclude: number[] = []): number[] {
-        let count = _count;
+    static randSome(num: number, count: number, exclude: number[] = []): number[] {
+        // let count = _count;
         let arr = [];
         if (num <= count) {
             for (let i = 0; i < count; i++) {
@@ -154,11 +159,11 @@ export default class Utils {
         return arr;
     }
 
-    static splitNumber(total: number, num: number, _min?: number, max?: number): number[] {
-        if (_min != null && max != null && (max < _min || total < _min * num || total > max * num)) {
+    static splitNumber(total: number, num: number, min?: number, max?: number): number[] {
+        if (min != null && max != null && (max < min || total < min * num || total > max * num)) {
             return;
         }
-        let min = _min || 0;
+        min = min || 0;
         let ret: number[] = [];
         let notFull: number[] = [];
         for (let i = 0; i < num; i++) {
@@ -231,7 +236,7 @@ export default class Utils {
     }
 
     static async wait(ms: number) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             setTimeout(() => {
                 resolve();
             }, ms);

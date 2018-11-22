@@ -11,5 +11,6 @@ import 'think-view';
 // import 'think-model';
 import 'think-cache';
 import 'think-session';
+import 'reflect-metadata';
 
 export const think = ThinkJS.think;

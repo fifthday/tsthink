@@ -13,7 +13,7 @@
         "no-empty": false,
         "member-access": false,
         "no-empty-interface": false,
-        "interface-name": false,
+        "interface-name": true,
         "eofline": false,
         "quotemark": false,
         "prefer-const": false,

@@ -35,10 +35,12 @@ module.exports = {
             ["tsconfig.json", "tsconfig.json"],
             ["tslint.json", "tslint.json"],
             [".eslintrc.js", ".eslintrc.js"],
+            ["ormconfig.js", "ormconfig.js"],
             ["src/@types", "src/@types"],
             ["src/scripts", "src/scripts"],
             ["src/middleware/error.ts", "src/middleware/error.ts"],
-            ["src/middleware/unlock.ts", "src/middleware/unlock.ts"]
+            ["src/middleware/unlock.ts", "src/middleware/unlock.ts"],
+            ["service/loader.ts", "service/loader.ts"]
         ],
         "multiModule": [
             ["src/bootstrap", "src/common/bootstrap"],
