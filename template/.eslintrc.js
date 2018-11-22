@@ -1,9 +1,16 @@
 module.exports = {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+        'typescript'
+    ],
     "env": {
         "es6": true,
         "node": true
     },
-    "extends": ["eslint:recommended"],
+    "extends": [
+        "eslint-config-alloy/typescript",
+        "eslint:recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "module",

@@ -41,6 +41,10 @@
         "typeorm": "^0.2.9"
     },
     "devDependencies": {
+        "eslint": "^5.9.0",
+        "eslint-config-alloy": "^1.4.2",
+        "eslint-plugin-typescript": "^0.13.0",
+        "typescript-eslint-parser": "^21.0.1",
         "node-notifier": "^5.0.2",
         "think-inspect": "0.0.2",
         "think-typescript": "^1.0.4",
