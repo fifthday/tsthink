@@ -1,11 +1,11 @@
 module.exports = [{
-    "name": "online",
     "type": "mysql",
-    "host": "10.0.0.10",
-    "port": 3306,
-    "database": "test",
-    "username": "root",
-    "password": "",
+    "name": "default",
+    // "host": "10.0.0.10",
+    // "port": 3306,
+    // "database": "test",
+    // "username": "root",
+    // "password": "",
 
     "charset": "UTF8_GENERAL_CI",
     "supportBigNumbers": true,
@@ -15,7 +15,7 @@ module.exports = [{
     "logging": ["error", "schema", "warn"],
     "maxQueryExecutionTime": 1500,
     "logger": "file",
-    "entityPrefix": "proto_",
+    // "entityPrefix": "proto_",
     "entities": ["app/proto/*.js"],
     "migrations": ["app/migration/*.js"],
     "cli": {
@@ -23,15 +23,15 @@ module.exports = [{
         "migrationsDir": "src/migration/",
         // "subscribersDir": ""
     },
-    "cache": {
-        "duration": 3600000,
-        "type": "redis",
-        "options": {
-            "host": "localhost",
-            "port": 6379,
-            "db": 10,
-            "prefix": "MysqlCache:"
-        }
-    }
+    // "cache": {
+    //     "duration": 3600000,
+    //     "type": "redis",
+    //     "options": {
+    //         "host": "localhost",
+    //         "port": 6379,
+    //         "db": 10,
+    //         "prefix": "MysqlCache:"
+    //     }
+    // }
     // "synchronize": true
 }];

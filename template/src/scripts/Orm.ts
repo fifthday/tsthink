@@ -1,6 +1,6 @@
 import { think } from 'thinkjs';
 
-import { createConnection, Connection, BaseEntity, getConnection } from "typeorm";
+import { createConnection, Connection, BaseEntity, getConnection, getConnectionOptions } from "typeorm";
 
 const ormConfigName = "default";// isDev ? 'default' : 'test';
 
@@ -18,7 +18,10 @@ export default class Orm extends think.Service {
 
     static async load() {
         try {
-            const connection = await createConnection(ormConfigName);
+            const connectionOptions = await getConnectionOptions(this.connectionName);
+            Object.assign(connectionOptions, think.config('mysql'));
+
+            const connection = await createConnection(connectionOptions);
             BaseEntity.useConnection(connection);
 
             if (connection.queryResultCache) {
