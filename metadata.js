@@ -18,7 +18,6 @@ module.exports = {
         "default": [
             ["src/bootstrap", "src/bootstrap"],
             ["src/config", "src/config"],
-            ["src/controller/base.ts", "src/controller/base.ts"],
             ["src/controller/index.ts", "src/controller/index.ts"],
             ["src/logic", "src/logic"],
             ["src/model", "src/model"],

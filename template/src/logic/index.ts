@@ -1,6 +1,6 @@
-import { think } from 'thinkjs';
+import BaseLogic from '../classes/BaseLogic';
 
-export default class extends think.Logic {
+export default class extends BaseLogic {
   indexAction() {
   }
 }

@@ -1,5 +1,5 @@
-import Base from '<%= actionPrefix %>base.js';
-export default class extends Base {
+import BaseController from '../classes/BaseController';
+export default class extends BaseController {
   indexAction() {
     return this.display();
   }
