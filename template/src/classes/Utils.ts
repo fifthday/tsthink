@@ -1,9 +1,11 @@
 import * as shortid from 'shortid';
 import * as crypto from 'crypto';
 import * as moment from 'moment';
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage, { ErrorDefineType } from './ErrorMessage';
 import { think, Context } from 'thinkjs';
-import fs = require('fs');
+import * as util from 'util';
+import * as fs from 'fs';
+import * as iconv from 'iconv-lite';
 
 export default class Utils {
     static md5(text: string) {
@@ -226,7 +228,7 @@ export default class Utils {
             arr.sort();
             let str = '';
             for (let one of arr) {
-                if (!think.isTrueEmpty(tbl[one])) {
+                if (!think.isEmpty(tbl[one])) {
                     str += `${one}=${tbl[one]}&`;
                 }
             }
@@ -243,7 +245,7 @@ export default class Utils {
         });
     }
 
-    static throw(code: [number, string] | Array<number | string>, info: string): never {
+    static throw(code: ErrorDefineType | Array<(number | string)>, info?: string): never {
         let error = new ErrorMessage(code[0] as number, code[1] as string, info);
         throw error;
         // if (typeof code === 'number') {
@@ -255,12 +257,25 @@ export default class Utils {
         // }
     }
 
+    static assertOrThrow(val: any, code: ErrorDefineType | Array<(number | string)>, info?: string) {
+        if (typeof val === 'boolean') {
+            if (!val) {
+                return this.throw(code, info);
+            }
+        } else {
+            if (think.isEmpty(val)) {
+                return this.throw(code, info);
+            }
+        }
+        return true;
+    }
+
     static cryptoPassword(password: string) {
         const cryptokey = 'crypto';
         return this.md5(`${password}.+.${cryptokey}`);
     }
 
-    static getRequireParamString(ctx: Context, key: string): any {
+    static getRequireParamString(ctx: Context, key: string): string {
         let val = ctx.param(key) || ctx.post(key);
         if (!think.isNullOrUndefined(val)) {
             return val;
@@ -317,5 +332,68 @@ export default class Utils {
             ret = str.slice(lastIndex);
         }
         return ret;
+    }
+
+    static async readFile(file: string, encoding: string = 'utf8') {
+        const fsreadfile = util.promisify(fs.readFile);
+        const buffer = await fsreadfile(file);
+        return buffer.toString(encoding);
+    }
+    static async readFileBuffer(file: string) {
+        const fsreadfile = util.promisify(fs.readFile);
+        const buffer = await fsreadfile(file);
+        return buffer;
+    }
+
+    static async readDir(dir: string, ext?: string): Promise<string[]> {
+        const fsreaddir = util.promisify(fs.readdir);
+        const fsstat = util.promisify(fs.stat);
+
+        let result: string[] = [];
+        let files = await fsreaddir(dir);
+        for (let one of files) {
+            const fname = `${dir}/${one}`;
+            const stats = await fsstat(fname);
+            if (stats.isDirectory()) {
+                result = result.concat(await this.readDir(fname, ext));
+            } else {
+                if (fname.endsWith(ext)) {
+                    result.push(fname);
+                }
+            }
+        }
+        return result;
+    }
+
+    static async loadCsv(file: string) {
+        const buffer = await this.readFileBuffer(file);
+        const csvData: string = iconv.decode(buffer, 'GB2312', {
+            stripBOM: true
+        });
+        const regex = /\r?\n|\"[^\"\r\n]*\"|[^,\r?\n]+|,(?=[,|\n])/g;
+        let matchArr = csvData.match(regex);
+        if (!think.isArray(matchArr)) {
+            return [];
+        }
+
+        let arr2: string[][] = [];
+        let oneMatch: string[] = [];
+        matchArr.forEach(word => {
+            if (word === '\r\n' || word === '\n') {
+                arr2.push(oneMatch);
+                oneMatch = [];
+            } else {
+                if (word === ',') {
+                    word = '';
+                }
+                oneMatch.push(word.trim());
+            }
+        });
+        return arr2;
+    }
+
+    static getClass<T>(ins: T): any {
+        let Cls = ins.constructor as any;
+        return Cls;
     }
 }

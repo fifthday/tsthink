@@ -8,7 +8,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
         "outDir": "app",
-        "baseUrl": ".",
+        "baseUrl": "./app",
         "paths": {
             "thinkjs": ["src/index"]
 

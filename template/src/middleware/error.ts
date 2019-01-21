@@ -1,12 +1,12 @@
 import * as Think from 'thinkjs';
-import ErrorMessage from '../scripts/ErrorMessage';
+import ErrorMessage from '../classes/ErrorMessage';
 export default (options: any, app: Think.Application) => {
     return async (ctx: Think.Context, next: () => void) => {
         try {
             await next();
         } catch (_error) {
-            let error = _error;
-            if (Think.think.isTrueEmpty(error.code)) {
+            let error: ErrorMessage = _error;
+            if (Think.think.isEmpty(error.code)) {
                 if (typeof error === 'string' || typeof error === 'number') {
                     error = new ErrorMessage(options.noCodeAs, 'Server Internal Error', String(error));
                 } else if (error.message) {
@@ -32,11 +32,11 @@ export default (options: any, app: Think.Application) => {
 
             ctx.fail(error.code, error.message);
 
-            // if (!think.isTrueEmpty(options.notReturnCode) && error.code >= options.notReturnCode) {
-            //     ctx.fail(error.code, error.message);
-            // } else {
-            //     ctx.fail(error.code, error.message);
-            // }
+            if (error.code === options.noCodeAs) {
+                // tslint:disable-next-line:no-console
+                console.trace(_error);
+                throw _error;
+            }
         }
         // return next();
     };

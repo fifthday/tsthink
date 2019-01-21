@@ -1,7 +1,8 @@
-declare module 'thinkjs' {
-  interface Service {
-  }
-}
+import { think } from "thinkjs";
 
-export default {
+module.exports = {
+    get sv() {
+        // return ServiceProxy;
+        return think.sv;
+    }
 };

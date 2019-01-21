@@ -1,10 +1,10 @@
 
-declare module 'thinkjs' {
-  export interface Controller {
-  }
-}
+module.exports = {
+    get sv() {
+        return this.ctx.sv;
+    },
 
-const controller = {
+    get uid() {
+        return this.ctx.state.user.user_id;
+    }
 };
-
-export default controller;

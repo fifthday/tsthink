@@ -21,9 +21,8 @@ module.exports = {
             ["src/controller/base.ts", "src/controller/base.ts"],
             ["src/controller/index.ts", "src/controller/index.ts"],
             ["src/logic", "src/logic"],
-            // ["src/model", "src/model"],
+            ["src/model", "src/model"],
             ["src/index.ts", "src/index.ts"],
-            ["test/index.ts", "test/index.ts"],
             ["view/index_index.html", "view/index_index.html"],
             ["development.js", "development.js"],
             ["gitignore", ".gitignore"],
@@ -37,10 +36,13 @@ module.exports = {
             [".eslintrc.js", ".eslintrc.js"],
             ["ormconfig.js", "ormconfig.js"],
             ["src/@types", "src/@types"],
-            ["src/scripts", "src/scripts"],
+            ["src/classes", "src/classes"],
             ["src/middleware/error.ts", "src/middleware/error.ts"],
             ["src/middleware/unlock.ts", "src/middleware/unlock.ts"],
-            ["service/loader.ts", "service/loader.ts"]
+            ["src/extend/think.ts", "src/extend/think.ts"],
+            ["src/extend/context.ts", "src/extend/context.ts"],
+            ["src/extend/controller.ts", "src/extend/controller.ts"],
+            ["src/extend/service.ts", "src/extend/service.ts"]
         ],
         "multiModule": [
             ["src/bootstrap", "src/common/bootstrap"],

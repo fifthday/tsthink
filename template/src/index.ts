@@ -8,7 +8,7 @@ import './extend/application';
 import './extend/request';
 import './extend/response';
 import 'think-view';
-// import 'think-model';
+import 'think-model';
 import 'think-cache';
 import 'think-session';
 import 'reflect-metadata';

@@ -1,34 +1,35 @@
 import { think } from 'thinkjs';
 import * as IORedis from 'ioredis';
-import Lock = require('redlock');
+import Redlock = require('redlock');
 
 think.app.on("appReady", async () => {
     think.logger.info('RedLock appReady!');
     try {
-        await RedLock.init();
+        await MyLock.init();
         think.logger.info(`RedLock init`);
     } catch (error) {
         think.logger.error(error);
     }
 });
 
-export default class RedLock extends think.Service {
-    private static redlock: Lock;
+export default class MyLock extends think.Service {
+    private static redlock: Redlock;
 
     private static LockPrefix = 'Redlock:';
     static async init() {
         return new Promise((resolve, reject) => {
             let lockRedis: IORedis.Redis[] = [];
-            let lockConfig = think.config('redis').redlock;
+            // let lockConfig = think.config('redis').redlock;
+            let lockConfig = think.conf.redis.redlock;
             if (think.isArray(lockConfig)) {
-                lockRedis = lockConfig.map((one: any) => {
+                lockRedis = (lockConfig as any).map((one: any) => {
                     return new IORedis(one);
                 });
             } else if (think.isObject(lockConfig)) {
                 lockRedis.push(new IORedis(lockConfig));
             }
             think.logger.info('redlock redis clients:' + lockRedis.length);
-            this.redlock = new Lock(lockRedis, {
+            this.redlock = new Redlock(lockRedis, {
                 // the expected clock drift; for more details
                 // see http://redis.io/topics/distlock
                 driftFactor: 0.01, // time in ms
@@ -53,5 +54,9 @@ export default class RedLock extends think.Service {
 
     static async lock(resource: string, ttl: number) {
         return this.redlock.lock(this.LockPrefix + resource, ttl);
+    }
+
+    static async unlock(lock: Redlock.Lock) {
+        await lock.unlock();
     }
 }

@@ -7,7 +7,7 @@ const rateLimit = require('koa2-ratelimit');
 module.exports = [
     {
         handle: rateLimit.RateLimit.middleware,
-        enable: true,
+        enable: false,
         options: {
             interval: { sec: 3 }, // 15 minutes = 15*60*1000
             max: 30, // limit each IP to 100 requests per interval
@@ -15,7 +15,6 @@ module.exports = [
             onLimitReached: (ctx: Context) => {
                 think.logger.error(`429:Client with ip= ${ctx.request.ip} onLimitReached,action= ${ctx.method}:${ctx.controller}/${ctx.action}, rateLimit= ${JSON.stringify(ctx.state.rateLimit)}`);
             },
-            store: new rateLimit.Stores.Redis(think.config('redis').rateLimit)
         }
     },
     {
@@ -27,7 +26,7 @@ module.exports = [
     },
     {
         handle: 'resource',
-        enable: isDev,
+        enable: true,
         options: {
             root: path.join(think.ROOT_PATH, 'www'),
             publicPath: /^\/(static|favicon\.ico)/
