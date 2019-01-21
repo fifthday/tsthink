@@ -10,12 +10,13 @@ const instance = new Application({
   transpiler: [typescript, {
     compilerOptions: {
       module: 'commonjs',
-      target: 'es2016',
+      target: 'es2017',
       sourceMap: true,
       noImplicitAny: true,
       removeComments: true,
       preserveConstEnums: true,
-      suppressImplicitAnyIndexErrors: true
+      suppressImplicitAnyIndexErrors: true,
+      esModuleInterop: true
     }
   }],
   notifier: notifier.notify.bind(notifier),

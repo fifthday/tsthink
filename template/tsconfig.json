@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2016",
+        "target": "es2017",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true,
+        "esModuleInterop": true,
         "outDir": "app",
         "baseUrl": "./app",
         "paths": {
